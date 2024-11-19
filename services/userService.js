@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://10.0.2.2:3000/api/user"; 
-const EXPERIENCE_URL = "http://10.0.2.2:3000/api/experiencias";
+const API_URL = "http://localhost:3000/api/user"; 
+const EXPERIENCE_URL = "http://localhost:3000/api/experiencias";
 
 // Obtener un usuario por su ID
 export const fetchUserById = async (userId) => {
@@ -28,7 +28,8 @@ export const fetchUsers = async () => {
 // Agregar un nuevo usuario
 export const addUser = async (newUser) => {
   try {
-    await axios.post(API_URL, newUser);
+    const response = await axios.post(API_URL, newUser);
+    return response.data; // Return the newly added user
   } catch (error) {
     console.error("Error al agregar usuario:", error);
     throw error;

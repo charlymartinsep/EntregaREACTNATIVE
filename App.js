@@ -10,6 +10,8 @@ import HomeScreen from "./screens/HomeScreen";
 import iconoUsuarios from './assets/icons/user.jpg';
 import iconoHome from './assets/icons/home.jpg';
 import iconoExperiencias from './assets/icons/experiencias.jpg';
+import busquedalogo from './assets/icons/busquedalogo.jpg';
+import SearchExperiences from "./components/SearchExperiences";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,8 +30,10 @@ export default function App() {
               iconSource = iconoHome; 
             } else if (route.name === 'Experiencias') {
               iconSource = iconoExperiencias; 
+            } else if (route.name === 'Search') {
+              iconSource = busquedalogo;
             }
-
+            
             // Reducir el tamaño del ícono si está seleccionado o no
             return (
               <Image
@@ -52,6 +56,7 @@ export default function App() {
         <Tab.Screen name="Usuarios" component={UsersScreen} />
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Experiencias" component={ExperiencesScreen} />
+        <Tab.Screen name="Buscar" component={SearchExperiences} />
       </Tab.Navigator>
     </NavigationContainer>
   );

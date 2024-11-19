@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://10.0.2.2:3000/api/experiencias";
+const API_URL = "http://localhost:3000/api/experiencias";
 
 // Obtener todas las experiencias desde la API
 export const fetchExperiences = async () => {
@@ -25,7 +25,7 @@ export const addExperience = async (newExperience) => {
       await Promise.all(
         participants.map((userId) =>
           axios.post(
-            `http://10.0.2.2:3000/api/user/addExperiencias/${userId}/${nuevaExperiencia._id}`,
+            `http://localhost:3000/api/user/addExperiencias/${userId}/${nuevaExperiencia._id}`,
           ),
         ),
       );
@@ -54,7 +54,7 @@ export const deleteExperience = async (experienceId) => {
       await Promise.all(
         participants.map(async (userId) => {
           await axios.delete(
-            `http://10.0.2.2:3000/api/user/delParticipant/${userId}/${experienceId}`,
+            `http://localhost:3000/api/user/delParticipant/${userId}/${experienceId}`,
           );
         }),
       );
@@ -66,4 +66,14 @@ export const deleteExperience = async (experienceId) => {
     console.error("Error al eliminar experiencia:", error);
     throw error;
   }
+};
+
+// Buscar experiencias por nombre de usuario
+export const searchByUsername = async (username) => {
+  const url = `${API_URL}/search`; // Define the URL for search
+  console.log('Search URL:', url, 'Params:', { username });
+  const response = await axios.get(url, {
+    params: { username },
+  });
+  return response.data;
 };
